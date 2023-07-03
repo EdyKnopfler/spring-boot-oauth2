@@ -26,31 +26,27 @@ public class CompromissosRepositorioTest {
 	@Autowired
 	private CompromissosRepositorio repositorio;
 	
-	private Usuario jao;
-	private Usuario ze;
-	private Usuario tiana;
-	
-	private Compromisso cabeleireiro;
-	private Compromisso niverDaTiana;
-	private Compromisso fugidinha;
+	private long idTiana;
+	private long idJao;
+	private long idZe;
 	
 	@BeforeEach
 	public void criarRegistros() {
-		jao = new Usuario("Jão", "jao@borda.com", "123");
-		ze = new Usuario("Zé", "ze@bar.com", "456");
-		tiana = new Usuario("Tiana", "tiana@vendinha.com", "789");
+		Usuario jao = new Usuario("Jão", "jao@borda.com", "123");
+		Usuario ze = new Usuario("Zé", "ze@bar.com", "456");
+		Usuario tiana = new Usuario("Tiana", "tiana@vendinha.com", "789");
 		
 		entityManager.persist(jao);
 		entityManager.persist(ze);
 		entityManager.persist(tiana);
 		
-		cabeleireiro = new Compromisso("Cabeleireiro", tiana);
+		Compromisso cabeleireiro = new Compromisso("Cabeleireiro", tiana);
 		
-		niverDaTiana = new Compromisso("Festinha", tiana);
+		Compromisso niverDaTiana = new Compromisso("Festinha", tiana);
 		niverDaTiana.convidar(ze);
 		niverDaTiana.convidar(jao);
 		
-		fugidinha = new Compromisso("Encontro às escondidas", jao);
+		Compromisso fugidinha = new Compromisso("Encontro às escondidas", jao);
 		fugidinha.convidar(tiana);
 		
 		entityManager.persist(cabeleireiro);
@@ -58,38 +54,42 @@ public class CompromissosRepositorioTest {
 		entityManager.persist(fugidinha);
 		
 		entityManager.flush();
+		
+		idTiana = tiana.getId();
+		idJao = jao.getId();
+		idZe = ze.getId();
 	}
 	
 	@Test
 	public void achaOsCompromissosDoDono() {
-		List<Compromisso> daTiana = repositorio.pertencentesAoUsuario(tiana.getId());
-		List<Compromisso> doJao = repositorio.pertencentesAoUsuario(jao.getId());
-		List<Compromisso> doZe = repositorio.pertencentesAoUsuario(ze.getId());
+		List<Compromisso> daTiana = repositorio.pertencentesAoUsuario(idTiana);
+		List<Compromisso> doJao = repositorio.pertencentesAoUsuario(idJao);
+		List<Compromisso> doZe = repositorio.pertencentesAoUsuario(idZe);
 		
 		assertEquals(2, daTiana.size());
-		assertEquals(cabeleireiro.getDescricao(), daTiana.get(0).getDescricao());
-		assertEquals(niverDaTiana.getDescricao(), daTiana.get(1).getDescricao());
+		assertEquals("Cabeleireiro", daTiana.get(0).getDescricao());
+		assertEquals("Festinha", daTiana.get(1).getDescricao());
 		
 		assertEquals(1, doJao.size());
-		assertEquals(fugidinha.getDescricao(), doJao.get(0).getDescricao());
+		assertEquals("Encontro às escondidas", doJao.get(0).getDescricao());
 		
 		assertEquals(0, doZe.size());
 	}
 	
 	@Test
 	public void achaOsConvitesRecebidos() {
-		List<Compromisso> daTiana = repositorio.ondeEhConvidado(tiana.getId());
-		List<Compromisso> doJao = repositorio.ondeEhConvidado(jao.getId());
-		List<Compromisso> doZe = repositorio.ondeEhConvidado(ze.getId());
+		List<Compromisso> daTiana = repositorio.ondeEhConvidado(idTiana);
+		List<Compromisso> doJao = repositorio.ondeEhConvidado(idJao);
+		List<Compromisso> doZe = repositorio.ondeEhConvidado(idZe);
 		
 		assertEquals(1, daTiana.size());
-		assertEquals(fugidinha.getDescricao(), daTiana.get(0).getDescricao());
+		assertEquals("Encontro às escondidas", daTiana.get(0).getDescricao());
 		
 		assertEquals(1, doJao.size());
-		assertEquals(niverDaTiana.getDescricao(), doJao.get(0).getDescricao());
+		assertEquals("Festinha", doJao.get(0).getDescricao());
 
 		assertEquals(1, doZe.size());
-		assertEquals(niverDaTiana.getDescricao(), doZe.get(0).getDescricao());
+		assertEquals("Festinha", doZe.get(0).getDescricao());
 	}
 
 }
