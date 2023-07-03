@@ -16,6 +16,7 @@ import lombok.Getter;
 @Entity
 public class Compromisso {
 	
+	@Getter
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
