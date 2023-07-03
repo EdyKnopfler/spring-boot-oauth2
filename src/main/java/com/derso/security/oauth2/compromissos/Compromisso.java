@@ -1,5 +1,6 @@
 package com.derso.security.oauth2.compromissos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.derso.security.oauth2.usuarios.Usuario;
@@ -19,21 +20,28 @@ public class Compromisso {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Getter
+	private String descricao;
+	
 	@ManyToOne
 	@Getter
 	private Usuario dono;
 	
 	@ManyToMany
 	@Getter
-	private List<Usuario> convidados;
+	private List<Usuario> convidados = new ArrayList<>();
 	
 	@Deprecated
 	Compromisso() {
 	}
 	
-	public Compromisso(Usuario dono, List<Usuario> convidados) {
+	public Compromisso(String descricao, Usuario dono) {
+		this.descricao = descricao;
 		this.dono = dono;
-		this.convidados = convidados;
+	}
+	
+	public void convidar(Usuario usuario) {
+		this.convidados.add(usuario);
 	}
 
 }
