@@ -1,4 +1,4 @@
-package com.derso.security.oauth2.config;
+package com.derso.security.oauth2.config.seguranca;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
