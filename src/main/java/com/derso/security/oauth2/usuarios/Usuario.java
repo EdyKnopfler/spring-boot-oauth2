@@ -1,7 +1,5 @@
 package com.derso.security.oauth2.usuarios;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,19 +20,14 @@ public class Usuario {
 	@Getter
 	private String email;
 	
-	@Getter
-	@JsonIgnore
-	private String senhaCriptografada;
-	
 	// Somente para uso da JPA
 	@Deprecated
 	Usuario() {
 	}
 	
-	public Usuario (String nome, String email, String senha) {
+	public Usuario (String nome, String email) {
 		this.nome = nome;
 		this.email = email;
-		this.senhaCriptografada = senha;  // TODO será tratado
 	}
 
 }

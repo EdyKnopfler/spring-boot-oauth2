@@ -10,6 +10,10 @@ import com.derso.security.oauth2.usuarios.Usuario;
 // Integração da classe de domínio Usuário com o Spring Security
 // Dá para implementar umas lógicas interessantes :)
 
+// TODO esta classe foi pensada para o fluxo Password Credentials
+// em um setup com o Authorization Server nesta aplicação.
+// Vamos seguir com o livro e entender o fluxo com JWT e Keycloak primeiro.
+
 @SuppressWarnings("serial")
 public class ResourceOwner implements UserDetails {
 	
@@ -30,7 +34,7 @@ public class ResourceOwner implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return usuario.getSenhaCriptografada();
+		return null;
 	}
 
 	@Override

@@ -32,9 +32,9 @@ public class CompromissosRepositorioTest {
 	
 	@BeforeEach
 	public void criarRegistros() {
-		Usuario jao = new Usuario("Jão", "jao@borda.com", "123");
-		Usuario ze = new Usuario("Zé", "ze@bar.com", "456");
-		Usuario tiana = new Usuario("Tiana", "tiana@vendinha.com", "789");
+		Usuario jao = new Usuario("Jão", "jao@borda.com");
+		Usuario ze = new Usuario("Zé", "ze@bar.com");
+		Usuario tiana = new Usuario("Tiana", "tiana@vendinha.com");
 		
 		entityManager.persist(jao);
 		entityManager.persist(ze);
