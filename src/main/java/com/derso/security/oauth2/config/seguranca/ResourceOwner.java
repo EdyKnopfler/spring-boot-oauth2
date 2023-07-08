@@ -19,6 +19,10 @@ public class ResourceOwner implements UserDetails {
 		this.usuario = usuario;
 	}
 	
+	public Long getId() {
+		return usuario.getId();
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return null;
