@@ -40,7 +40,7 @@ public class SegurancaConfig {
 			)
 			// Isto substitui a antiga API :)
 			// Refs.: https://www.baeldung.com/spring-security-oauth
-			// TODO subir um Keycloak e 
+			// TODO subir um Keycloak e testar
 			
 			// Resource Server: valida tokens ao disponibilizar os recursos
 			// (codado "na mão" no projeto da Udemy)
