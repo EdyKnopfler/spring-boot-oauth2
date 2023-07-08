@@ -25,6 +25,8 @@ public class SegurancaConfig {
 				antMatcher("/jquery*")
 		).toArray(AntPathRequestMatcher[]::new);
 		
+		AntPathRequestMatcher caminhosApi = antMatcher("/api/**");
+		
 		return http
 				.authorizeHttpRequests(
 					autorizacao -> autorizacao
@@ -32,6 +34,10 @@ public class SegurancaConfig {
 						.anyRequest().authenticated()
 				)
 				.formLogin(Customizer.withDefaults())
+				.csrf(
+					csrf -> csrf
+						.ignoringRequestMatchers(caminhosApi)
+				)
 				.build();
 	}
 
