@@ -28,17 +28,26 @@ public class SegurancaConfig {
 		AntPathRequestMatcher caminhosApi = antMatcher("/api/**");
 		
 		return http
-				.authorizeHttpRequests(
-					autorizacao -> autorizacao
-						.requestMatchers(caminhosPermitidos).permitAll()
-						.anyRequest().authenticated()
-				)
-				.formLogin(Customizer.withDefaults())
-				.csrf(
-					csrf -> csrf
-						.ignoringRequestMatchers(caminhosApi)
-				)
-				.build();
+			.authorizeHttpRequests(
+				autorizacao -> autorizacao
+					.requestMatchers(caminhosPermitidos).permitAll()
+					.anyRequest().authenticated()
+			)
+			.formLogin(Customizer.withDefaults())
+			.csrf(
+				csrf -> csrf
+					.ignoringRequestMatchers(caminhosApi)
+			)
+			// Isto substitui a antiga API :)
+			// Refs.: https://www.baeldung.com/spring-security-oauth
+			// TODO subir um Keycloak e 
+			
+			// Resource Server: valida tokens ao disponibilizar os recursos
+			// (codado "na mão" no projeto da Udemy)
+			// https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+			// https://www.baeldung.com/spring-security-oauth-jwt
+			.oauth2ResourceServer(oauth2 -> oauth2.jwt())
+			.build();
 	}
-
+	
 }
