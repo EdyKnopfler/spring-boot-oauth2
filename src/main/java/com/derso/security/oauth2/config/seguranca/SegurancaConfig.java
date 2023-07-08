@@ -46,6 +46,7 @@ public class SegurancaConfig {
 			// (codado "na mão" no projeto da Udemy)
 			// https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
 			// https://www.baeldung.com/spring-security-oauth-jwt
+			// https://ravthiru.medium.com/springboot-oauth2-with-keycloak-for-bearer-client-3a31f608a78
 			.oauth2ResourceServer(oauth2 -> oauth2.jwt())
 			.build();
 	}
