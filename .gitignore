@@ -35,3 +35,4 @@ build/
 ### Databases
 dev-database.*.db
 test-database.*.db
+db/
