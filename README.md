@@ -16,7 +16,7 @@ Para mais detalhes sobre ele, consulte a sua documentação.
 
 Os arquivos `application-<environment>.properties` fazem referência ao realm `derco`. Este realm deve ser configurado e dentro dele deve ser criado um cliente.
 
-Deve criado um cliente OpenID com a opção de acesso direto (_Direct access grants_) habilitadas para testes com o comando `curl` (ver abaixo).
+Deve ser criado um cliente OpenID com a opção de acesso direto (_Direct access grants_) habilitadas para testes com o comando `curl` (ver abaixo).
 
 ## URLs de configuração
 
